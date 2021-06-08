@@ -12,20 +12,24 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(express.json())
 
-app.use(cors())
+app.use(
+    cors({
+        origin: 'https://fur-friendly-spaces.vercel.app/'
+    })
+);
 
-app.get('/', (req,res) => {
+app.get('/api/', (req,res) => {
     res.send("Database Endpoint Homepage")
 })
 
-app.get('/spaces', (req,res, next) => {
+app.get('/api/spaces', (req,res, next) => {
     const knexInstance = req.app.get('db')
     databaseService.getAllSapces(knexInstance)
         .then(spaces => res.json(spaces))
         .catch(next)
 })
 
-app.post('/spaces', (req, res, next) => {
+app.post('/api/spaces', (req, res, next) => {
     const knexInstance = req.app.get('db')
     const {id,name,address,city,type} = req.body
     const newSpace = {id,name,address,city,type}
@@ -35,7 +39,7 @@ app.post('/spaces', (req, res, next) => {
         .catch(next)
 })
 
-app.patch('/spaces/:id', (req,res,next) => {
+app.patch('/api/spaces/:id', (req,res,next) => {
     const knexInstance = req.app.get('db')
     const {id,upCount,downCount} = req.body
 
