@@ -35,7 +35,7 @@ app.post('/api/spaces', (req, res, next) => {
     const newSpace = {id,name,address,city,type}
 
     databaseService.insertSpace(knexInstance, newSpace)
-        .then(newSpace => res.json(newSpace))
+        .then(res.status(201).send(newSpace))
         .catch(next)
 })
 
@@ -44,7 +44,7 @@ app.patch('/api/spaces/:id', (req,res,next) => {
     const {id,upCount,downCount} = req.body
 
     databaseService.updateSpace(knexInstance, id, upCount, downCount)
-    .then(updatedSpace => res.json(updatedSpace))
+        .then(res.status(201).send(req.body))
         .catch(next)
 })
 
