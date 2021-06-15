@@ -1,5 +1,5 @@
 const databaseService = {
-    getAllSapces(knex){
+    getAllSpaces(knex){
         'Returns all notes in the database'
         return knex 
             .from('spaces')

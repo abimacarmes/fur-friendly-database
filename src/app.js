@@ -24,7 +24,7 @@ app.get('/api/', (req,res) => {
 
 app.get('/api/spaces', (req,res, next) => {
     const knexInstance = req.app.get('db')
-    databaseService.getAllSapces(knexInstance)
+    databaseService.getAllSpaces(knexInstance)
         .then(spaces => res.json(spaces))
         .catch(next)
 })
